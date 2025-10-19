@@ -47,12 +47,13 @@ src
 │   ├── Repository
 │   │   ├── VehicleRepository.php (repository implementation)
 ```
- 
+
 ## Project Setup
 ```sh
 composer install
 touch db/assqlite.db  # create a database file
 yarn install
+yarn watch
 yarn dev
 php -S localhost:8008  # start the server
 ```
@@ -68,8 +69,12 @@ CREATE TABLE vehicles (
   created_at INTEGER,
   updated_at INTEGER
 );
+
+INSERT INTO vehicles (registration_number, brand, model, type, created_at, updated_at) VALUES
+            ('DW22233', 'Mercedes', 'MP-4', 'Truck', 1588681500, 1623078300),
+            ('BORQ4500', 'MAN', 'TGE', 'Bus', 1622988060, 1622988060),
+            ('DW33445', 'Toyota', 'Corolla', 'Passenger', 1625480700, 1628337900);
 ```
- 
 ## API Endpoints
 - `/vehicles` **[GET]** - index, main template
 - `/vehicles/list` **[GET]** - vehicle list

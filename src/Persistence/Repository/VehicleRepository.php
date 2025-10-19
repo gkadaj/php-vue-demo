@@ -1,10 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Persistence\Repository;
 
 use App\SQLiteConnection;
 use Domain\Entity\Vehicle;
+use Domain\Mapper\VehicleMapper;
 use Domain\Repository\VehicleRepositoryInterface;
+use Domain\Service\VehicleDTO;
 
 class VehicleRepository implements VehicleRepositoryInterface
 {
@@ -15,7 +18,7 @@ class VehicleRepository implements VehicleRepositoryInterface
         $this->pdo = (new SQLiteConnection())->connect();
     }
 
-    public function getList()
+    public function getList(): array
     {
         $results = $this->pdo->query('SELECT * FROM vehicles');
 
@@ -27,19 +30,35 @@ class VehicleRepository implements VehicleRepositoryInterface
         return $items;
     }
 
-    public function getById($id)
+    public function getById(int $id): Vehicle
     {
+        $sql = "SELECT * FROM vehicles WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+        return $this->rowToEntity($row);
     }
 
-    public function deleteById($id)
+    public function deleteById(int $id): void
     {
-
+        $sql = "DELETE FROM vehicles WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
     }
 
-    public function persist(Vehicle $vehicle)
+    public function persist(Vehicle $vehicle): void
     {
+        $sql = "UPDATE vehicles SET registration_number = ?, brand = ?, model = ?, type = ?, updated_at = ? WHERE id = ?";
 
+        $this->pdo->prepare($sql)
+            ->execute([
+                $vehicle->getRegistrationNumber(),
+                $vehicle->getBrand(),
+                $vehicle->getModel(),
+                $vehicle->getType(),
+                time(),
+                $vehicle->getId()]);
     }
 
     private function rowToEntity($row)

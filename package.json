@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite build --watch --base /public",
+    "dev": "vite",
+    "watch": "vite build --watch --base /public",
     "build": "vite build --base /public"
   },
   "dependencies": {

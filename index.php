@@ -1,6 +1,7 @@
 <?php
 require_once './vendor/autoload.php';
 
+use App\Controller\CORSHeader;
 use App\Controller\VehicleController;
 use Symfony\Component\HttpFoundation\{Request, Response};
 use Symfony\Component\Routing\{
@@ -52,9 +53,9 @@ try {
         $request->getMethod() === 'POST' ? $request : null,
     );
 } catch (ResourceNotFoundException $e) {
-    (new Response(content: $e->getMessage(), status: 404))->send();
+    (new Response(content: $e->getMessage(), status: 404, headers: CORSHeader::$headers))->send();
 } catch (MethodNotAllowedException $e) {
-    (new Response(content: 'Method Not Allowed', status: 405))->send();
+    (new Response(content: 'Method Not Allowed', status: 405, headers: CORSHeader::$headers))->send();
 } catch (Throwable $e) {
-    (new Response(content: $e->getMessage(), status: 500))->send();
+    (new Response(content: $e->getMessage(), status: 500, headers: CORSHeader::$headers))->send();
 }
