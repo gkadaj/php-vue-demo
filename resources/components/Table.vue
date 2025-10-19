@@ -36,13 +36,13 @@
               <v-row>
                 <v-col cols="12">
                   <v-text-field v-model="editedItem.registrationNumber" label="Registration Number"
-                                maxlength="255"></v-text-field>
+                                maxlength="16"></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="editedItem.brand" label="Brand" maxlength="255"></v-text-field>
+                  <v-text-field v-model="editedItem.brand" label="Brand" maxlength="60"></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="editedItem.model" label="Model" maxlength="255"></v-text-field>
+                  <v-text-field v-model="editedItem.model" label="Model" maxlength="60"></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field v-model="editedItem.type" label="Vehicle Type" maxlength="255"></v-text-field>

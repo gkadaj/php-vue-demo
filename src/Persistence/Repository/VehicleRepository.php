@@ -8,6 +8,7 @@ use Domain\Entity\Vehicle;
 use Domain\Mapper\VehicleMapper;
 use Domain\Repository\VehicleRepositoryInterface;
 use Domain\Service\VehicleDTO;
+use Exception;
 
 class VehicleRepository implements VehicleRepositoryInterface
 {
@@ -30,12 +31,18 @@ class VehicleRepository implements VehicleRepositoryInterface
         return $items;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getById(int $id): Vehicle
     {
         $sql = "SELECT * FROM vehicles WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (!$row) {
+            throw new Exception('Vehicle not found');
+        }
 
         return $this->rowToEntity($row);
     }
