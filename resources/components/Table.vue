@@ -36,17 +36,19 @@
               <v-row>
                 <v-col cols="12">
                   <v-text-field v-model="editedItem.registrationNumber" label="Registration Number"
-                                :rules="[value => !!value || 'Required.']"
-                                maxlength="16"></v-text-field>
+                                :rules="[value => !!value || 'Required.']" maxlength="16"></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="editedItem.brand" label="Brand" :rules="[value => !!value || 'Required.']" maxlength="60"></v-text-field>
+                  <v-text-field v-model="editedItem.brand" label="Brand"
+                                :rules="[value => !!value || 'Required.']" maxlength="60"></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="editedItem.model" label="Model" :rules="[value => !!value || 'Required.']" maxlength="60"></v-text-field>
+                  <v-text-field v-model="editedItem.model" label="Model"
+                                :rules="[value => !!value || 'Required.']" maxlength="60"></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="editedItem.type" label="Vehicle Type" :rules="[value => !!value || 'Required.']" maxlength="255"></v-text-field>
+                  <v-text-field v-model="editedItem.type" label="Vehicle Type"
+                                :rules="[value => !!value || 'Required.']" maxlength="255"></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
