@@ -10,6 +10,7 @@ use Domain\Service\VehiclesBuilder;
 use Domain\Service\VehiclesReader;
 use Domain\Service\VehiclesWriter;
 use Domain\Validation\VehicleValidator;
+use InvalidArgumentException;
 use Persistence\Repository\VehicleRepository;
 use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 
@@ -36,10 +37,10 @@ class VehicleController extends BaseController
         $vehicleDTO = new VehicleDTO();
         $vehicleDTO->id = $id;
         $vehicleDTO->registrationNumber = $vehicleData->registrationNumber
-            ?? throw new \InvalidArgumentException('Registration number is required');
-        $vehicleDTO->brand = $vehicleData->brand ?? throw new \InvalidArgumentException('Brand is required');
-        $vehicleDTO->model = $vehicleData->model ?? throw new \InvalidArgumentException('Model is required');
-        $vehicleDTO->type = $vehicleData->type ?? throw new \InvalidArgumentException('Type is required');;
+            ?? throw new InvalidArgumentException('Registration number is required');
+        $vehicleDTO->brand = $vehicleData->brand ?? throw new InvalidArgumentException('Brand is required');
+        $vehicleDTO->model = $vehicleData->model ?? throw new InvalidArgumentException('Model is required');
+        $vehicleDTO->type = $vehicleData->type ?? throw new InvalidArgumentException('Type is required');;
 
         $vehicleDTO = (new VehicleSanitizer())->sanitize($vehicleDTO);
         (new VehicleValidator())->validate($vehicleDTO);
