@@ -9,6 +9,7 @@ use Domain\Mapper\VehicleMapper;
 use Domain\Repository\VehicleRepositoryInterface;
 use Domain\Service\VehicleDTO;
 use Exception;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class VehicleRepository implements VehicleRepositoryInterface
 {
@@ -41,7 +42,7 @@ class VehicleRepository implements VehicleRepositoryInterface
         $stmt->execute([$id]);
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
         if (!$row) {
-            throw new Exception('Vehicle not found');
+            throw new ResourceNotFoundException('Vehicle not found');
         }
 
         return $this->rowToEntity($row);
