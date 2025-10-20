@@ -35,10 +35,10 @@ class VehicleController extends BaseController
 
         $vehicleDTO = new VehicleDTO();
         $vehicleDTO->id = $id;
-        $vehicleDTO->registrationNumber = $vehicleData->registrationNumber;
-        $vehicleDTO->brand = $vehicleData->brand;
-        $vehicleDTO->model = $vehicleData->model;
-        $vehicleDTO->type = $vehicleData->type;
+        $vehicleDTO->registrationNumber = $vehicleData->registrationNumber ?? throw new \InvalidArgumentException('Registration number is required');
+        $vehicleDTO->brand = $vehicleData->brand ?? throw new \InvalidArgumentException('Brand is required');
+        $vehicleDTO->model = $vehicleData->model ?? throw new \InvalidArgumentException('Model is required');
+        $vehicleDTO->type = $vehicleData->type ?? throw new \InvalidArgumentException('Type is required');;
 
         $vehicleDTO = (new VehicleSanitizer())->sanitize($vehicleDTO);
         (new VehicleValidator())->validate($vehicleDTO);
